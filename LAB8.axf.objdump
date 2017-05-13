@@ -1,0 +1,26 @@
+
+C:/Users/Larry/Desktop/DE1-Soc/LAB8.axf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <__cs3_interrupt_vector>:
+	.include "address_map_arm.s"
+	.text 
+	.global _start
+_start:
+		LDR R0, =SW_BASE
+   0:	e59f0010 	ldr	r0, [pc, #16]	; 18 <ICCEOIR+0x8>
+		LDR r1, =LEDR_BASE
+   4:	e59f1010 	ldr	r1, [pc, #16]	; 1c <ICCEOIR+0xc>
+
+00000008 <L1>:
+L1:		LDR r2,[R0]  // load the switch value
+   8:	e5902000 	ldr	r2, [r0]
+		MOV R3, R2, LSL #1 // 
+   c:	e1a03082 	lsl	r3, r2, #1
+		STR R3,[r1]
+  10:	e5813000 	str	r3, [r1]
+  14:	eafffffb 	b	8 <L1>
+  18:	ff200040 	.word	0xff200040
+  1c:	ff200000 	.word	0xff200000
